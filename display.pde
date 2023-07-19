@@ -1,5 +1,8 @@
 boolean[][] displayBuffer = new boolean[48][31];
 
+color onLEDColor = color(36,57,51);
+color offLEDColor = color(83,112,97);
+
 void draw() {
 
   onRender();
@@ -9,13 +12,15 @@ void draw() {
   for (int x=0; x<displayBuffer.length; x++) {
     for (int y=0; y<displayBuffer[0].length; y++) {
       if (displayBuffer[x][y] == true) {
-        fill(36,57,51);
+        fill(onLEDColor); // Filled LED pixel
       } else {
-        fill(83,112,97);
+        fill(offLEDColor); // Unfilled LED pixel
       }
       rect(x*10, y*10 + 85, 9, 9);
     }
   }
+
+  drawIcons();
 
   displayBuffer = new boolean[48][31];
 }
