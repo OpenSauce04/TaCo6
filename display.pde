@@ -2,7 +2,7 @@ boolean[][] displayBuffer = new boolean[48][31];
 
 void draw() {
 
-  game();
+  onRender();
 
   background(121,145,108);
 
@@ -16,6 +16,8 @@ void draw() {
       rect(x*10, y*10 + 85, 9, 9);
     }
   }
+
+  displayBuffer = new boolean[48][31];
 }
 
 void drawPixel(int x, int y) {
@@ -27,7 +29,12 @@ void drawSprite(String fileName, int x, int y) {
 
   for (int lx=0; lx<sprite.width; lx++) {
     for (int ly=0; ly<sprite.height; ly++) {
-      displayBuffer[x + lx][y + ly] = sprite.pixels[(lx + ly*sprite.width)] == color(0);
+      color pixel = sprite.pixels[(lx + ly*sprite.width)];
+      if (pixel == color(0, 0, 0)) {
+        displayBuffer[x + lx][y + ly] = true;
+      } else if (pixel == color(255, 255, 255)) {
+        displayBuffer[x + lx][y + ly] = false;
+      }
     }
   }
 }
